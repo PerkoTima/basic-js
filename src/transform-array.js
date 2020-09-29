@@ -5,9 +5,9 @@ module.exports = function transform(arr) {
 	if(Array.isArray(arr)){
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i] === '--discard-next') {
-				if ((i += 2) <= arr.length) {
-					i += 2
-				}
+				if ((arr[i + 2]) !== '--discard-prev' && (arr[i + 2]) !== '--double-prev') {
+					i += 1
+				}else{ i += 2}
 			}else if (arr[i] === '--discard-prev'){
 				new_arr.pop()
 			}else if (arr[i] === '--double-next' ){
@@ -16,7 +16,7 @@ module.exports = function transform(arr) {
 				}
 			}else if (arr[i] === '--double-prev'){
 				if (arr[i - 1] !== undefined) {
-					new_arr.push(new_arr[new_arr.length - 1])
+					new_arr.push(arr[i - 1])
 				}
 			}else{
 				new_arr.push(arr[i])
